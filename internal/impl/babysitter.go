@@ -267,7 +267,7 @@ func (b *babysitter) GetListenerAddress(_ context.Context, request *protos.GetLi
 }
 
 // GetAntipodeAgentInfo implements the control.DeployerControl interface.
-/*func (b *babysitter) GetAntipodeAgentInfo(_ context.Context, request *protos.GetAntipodeAgentInfoRequest) (*protos.GetAntipodeAgentInfoReply, error) {
+func (b *babysitter) GetAntipodeAgentInfo(_ context.Context, request *protos.GetAntipodeAgentInfoRequest) (*protos.GetAntipodeAgentInfoReply, error) {
 	if antipodeAgent, ok := b.cfg.AntipodeAgents[request.Name]; !ok {
 		// The antipode agent name does not exist.
 		return nil, fmt.Errorf("The antipode agent %s does not exist", request.Name)
@@ -282,7 +282,7 @@ func (b *babysitter) GetListenerAddress(_ context.Context, request *protos.GetLi
 		}
 		return reply, nil
 	}
-}*/
+}
 
 // ExportListener implements the envelope.EnvelopeHandler interface.
 func (b *babysitter) ExportListener(context.Context, *protos.ExportListenerRequest) (*protos.ExportListenerReply, error) {
