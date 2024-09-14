@@ -83,7 +83,7 @@ type kubeConfig struct {
 	Listeners []listenerSpec
 
 	// Options for the application Antipode agents.
-	AntipodeAgents []listenerSpec
+	AntipodeAgents []antipodeAgentSpec
 
 	// Resource requirements needed to run the pods. Note that the resources should
 	// satisfy the format specified in [1].
