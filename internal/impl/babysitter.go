@@ -84,6 +84,7 @@ func NewBabysitter(ctx context.Context, app *protos.AppConfig, config *Babysitte
 		Weavelet:  wlet.Id,
 		Attrs:     []string{"serviceweaver/system", ""},
 	})
+	logger.Debug("print")
 	e, err := envelope.NewEnvelope(ctx, wlet, app, envelope.Options{Logger: logger})
 	if err != nil {
 		return nil, fmt.Errorf("NewBabysitter: create envelope: %w", err)
