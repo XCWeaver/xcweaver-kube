@@ -68,6 +68,7 @@ type babysitter struct {
 var _ envelope.EnvelopeHandler = &babysitter{}
 
 func NewBabysitter(ctx context.Context, app *protos.AppConfig, config *BabysitterConfig, components []string, opts BabysitterOptions) (*babysitter, error) {
+	fmt.Println("1")
 	// Create the envelope.
 	wlet := &protos.WeaveletArgs{
 		App:             app.Name,
@@ -76,6 +77,7 @@ func NewBabysitter(ctx context.Context, app *protos.AppConfig, config *Babysitte
 		RunMain:         slices.Contains(components, runtime.Main),
 		InternalAddress: fmt.Sprintf(":%d", internalPort),
 	}
+	fmt.Println("2")
 	logger := logging.StderrLogger(logging.Options{
 		App:       app.Name,
 		Component: "babysitter",
@@ -86,16 +88,19 @@ func NewBabysitter(ctx context.Context, app *protos.AppConfig, config *Babysitte
 	if err != nil {
 		return nil, fmt.Errorf("NewBabysitter: create envelope: %w", err)
 	}
+	fmt.Println("3")
 
 	// Create a Kubernetes client set.
 	kubeConfig, err := rest.InClusterConfig()
 	if err != nil {
 		return nil, fmt.Errorf("NewBabysitter: get kube config: %w", err)
 	}
+	fmt.Println("4")
 	clientset, err := kubernetes.NewForConfig(kubeConfig)
 	if err != nil {
 		return nil, fmt.Errorf("NewBabysitter: get kube client set: %w", err)
 	}
+	fmt.Println("5")
 
 	// Create the babysitter.
 	b := &babysitter{
@@ -109,10 +114,12 @@ func NewBabysitter(ctx context.Context, app *protos.AppConfig, config *Babysitte
 		watching:  map[string]struct{}{},
 	}
 
+	fmt.Println("6")
 	// Create the pretty printer for logging, if there is no log handler.
 	if opts.HandleLogEntry == nil {
 		b.printer = logging.NewPrettyPrinter(false /*colors disabled*/)
 	}
+	fmt.Println("7")
 
 	// Inform the weavelet of the components it should host.
 	if err := b.envelope.UpdateComponents(components); err != nil {
