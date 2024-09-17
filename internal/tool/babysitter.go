@@ -49,12 +49,10 @@ Flags:
 			if err != nil {
 				return err
 			}
-			fmt.Println("hello")
 			config, err := parseBabysitterConfig(args[1])
 			if err != nil {
 				return err
 			}
-			fmt.Println("hello2")
 			components := args[2:]
 
 			// Create the babysitter.
