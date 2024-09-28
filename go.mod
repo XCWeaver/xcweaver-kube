@@ -3,7 +3,7 @@ module github.com/XCWeaver/xcweaver-kube
 go 1.21
 
 require (
-	github.com/XCWeaver/xcweaver v0.0.5
+	github.com/XCWeaver/xcweaver v0.0.6
 	github.com/google/uuid v1.3.1
 	go.opentelemetry.io/otel/sdk v1.19.0
 	golang.org/x/exp v0.0.0-20230713183714-613f0c0eb8a1

@@ -123,6 +123,22 @@ func Deploy(ctx context.Context, configFilename string) error {
 		}
 	}
 
+	binAntipode, err := bin.ReadAntipodeAgents(app.Binary)
+	if err != nil {
+		return fmt.Errorf("cannot read Antipode agents from binary %s: %w", app.Binary, err)
+	}
+	all := make(map[string]struct{})
+	for _, c := range binAntipode {
+		for _, l := range c.AntipodeAgents {
+			all[l] = struct{}{}
+		}
+	}
+	for _, anti := range config.AntipodeAgents {
+		if _, ok := all[anti.Name]; !ok {
+			return fmt.Errorf("Antipode agent %s specified in the config not found in the binary", anti.Name)
+		}
+	}
+
 	// Unique app deployment identifier.
 	depId := uuid.New().String()
 
